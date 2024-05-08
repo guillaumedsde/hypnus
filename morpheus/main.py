@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from morpheus import power, tempo
 
 
