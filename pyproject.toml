@@ -11,6 +11,7 @@ python = "^3.11"
 [tool.poetry.group.dev.dependencies]
 ruff = "0.4.3"
 mypy = "1.10.0"
+pytest = "8.2.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -69,3 +70,20 @@ convention = "google"
 # NOTE: allow ommission of __init__ return type
 #       https://github.com/charliermarsh/ruff/blob/f6fd702d41e0456d78abd66055b75684e612c9bb/README.md#mypy-init-return
 mypy-init-return = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/test_*.py" = [
+    # Allow use of assert in tests
+    "S101",
+    # Allow testing private module members
+    "SLF001",
+    # Don't warn about implicit module, pytest discovery does not require modules
+    "INP001"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/"]
+xfail_strict = true
+addopts = """
+-W error
+"""
