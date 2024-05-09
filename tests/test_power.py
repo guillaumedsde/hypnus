@@ -30,3 +30,9 @@ def test_shutdown_posix(mock_run: mock.MagicMock, platform: str) -> None:
         ("shutdown", "-h", "now"),
         check=True,
     )
+
+
+@mock.patch("morpheus.power.sys.platform", new="an_unkown_platform")
+def test_shutdown_unimplemented_platform() -> None:
+    with pytest.raises(power.ShutdownNotImplementedForPlatformError):
+        power.shutdown()
