@@ -1,5 +1,5 @@
-import os
-import platform
+import subprocess
+import sys
 
 
 class ShutdownNotImplementedForPlatformError(NotImplementedError): ...
@@ -17,12 +17,21 @@ def shutdown() -> None:
         CouldNotShutdownError:
             When an error occured while shutting down computer.
     """
-    match platform.system():
-        case "Windows":
-            exit_code = os.system("shutdown -s")
-        case "Linux" | "Darwin":
-            exit_code = os.system("shutdown -h now")
+    match sys.platform:
+        case "win32":
+            import ctypes
+
+            user32 = ctypes.WinDLL("user32")
+            user32.ExitWindowsEx(0x00000008, 0x00000000)
+        case (
+            "linux"
+            | "linux2"
+            | "darwin"
+            | "freebsd7"
+            | "freebsd8"
+            | "freebsdN"
+            | "openbsd6"
+        ):
+            subprocess.run(["shutdown", "-h", "now"], check=False)  # noqa: S603
         case _:
             raise ShutdownNotImplementedForPlatformError
-    if exit_code != 0:
-        raise CouldNotShutdownError
