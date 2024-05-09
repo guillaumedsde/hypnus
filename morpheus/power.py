@@ -20,8 +20,19 @@ def _windows_shutdown() -> None:
     user32.ExitWindowsEx(EWX_POWEROFF, SHTDN_REASON_MAJOR_OTHER)
 
 
+POSIX_PLATFORMS = {
+    "linux",
+    "linux2",
+    "darwin",
+    "freebsd7",
+    "freebsd8",
+    "freebsdN",
+    "openbsd6",
+}
+
+
 def _posix_shutdown() -> None:
-    subprocess.run(["shutdown", "-h", "now"], check=False)  # noqa: S603
+    subprocess.run(("shutdown", "-h", "now"), check=True)  # noqa: S603
 
 
 def shutdown() -> None:
@@ -33,18 +44,9 @@ def shutdown() -> None:
         CouldNotShutdownError:
             When an error occured while shutting down computer.
     """
-    match sys.platform:
-        case "win32":
-            _windows_shutdown()
-        case (
-            "linux"
-            | "linux2"
-            | "darwin"
-            | "freebsd7"
-            | "freebsd8"
-            | "freebsdN"
-            | "openbsd6"
-        ):
-            _posix_shutdown()
-        case _:
-            raise ShutdownNotImplementedForPlatformError
+    if sys.platform == "win32":
+        _windows_shutdown()
+    elif sys.platform in POSIX_PLATFORMS:
+        _posix_shutdown()
+    else:
+        raise ShutdownNotImplementedForPlatformError
