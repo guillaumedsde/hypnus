@@ -1,3 +1,4 @@
+import ctypes
 import subprocess
 import sys
 
@@ -6,6 +7,21 @@ class ShutdownNotImplementedForPlatformError(NotImplementedError): ...
 
 
 class CouldNotShutdownError(RuntimeError): ...
+
+
+# NOTE: shutdown type
+EWX_POWEROFF = 0x00000008
+# NOTE: shutdown reason
+SHTDN_REASON_MAJOR_OTHER = 0x00000000
+
+
+def _windows_shutdown() -> None:
+    user32 = ctypes.WinDLL("user32")
+    user32.ExitWindowsEx(EWX_POWEROFF, SHTDN_REASON_MAJOR_OTHER)
+
+
+def _posix_shutdown() -> None:
+    subprocess.run(["shutdown", "-h", "now"], check=False)  # noqa: S603
 
 
 def shutdown() -> None:
@@ -19,10 +35,7 @@ def shutdown() -> None:
     """
     match sys.platform:
         case "win32":
-            import ctypes
-
-            user32 = ctypes.WinDLL("user32")
-            user32.ExitWindowsEx(0x00000008, 0x00000000)
+            _windows_shutdown()
         case (
             "linux"
             | "linux2"
@@ -32,6 +45,6 @@ def shutdown() -> None:
             | "freebsdN"
             | "openbsd6"
         ):
-            subprocess.run(["shutdown", "-h", "now"], check=False)  # noqa: S603
+            _posix_shutdown()
         case _:
             raise ShutdownNotImplementedForPlatformError
