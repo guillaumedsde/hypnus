@@ -23,7 +23,7 @@ def test_main_shutdown_on_day_color(
     caplog.set_level(logging.INFO)
     mock_get_todays_tempo_color.return_value = tempo_color
 
-    main._main()
+    main.main()
 
     mock_get_todays_tempo_color.assert_called_once_with()
 
