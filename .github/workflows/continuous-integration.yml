@@ -2,7 +2,7 @@ name: Continuous Integration
 on:
   - push
 jobs:
-  tests:
+  check-test-build:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -26,8 +26,18 @@ jobs:
       - run: poetry install
 
       - run: poetry run ruff check --output-format=github
-        if: "${{ matrix.python_version == '3.11' }}"
+        if: "${{ matrix.python_version == '3.12' }}"
 
       - run: poetry run mypy --python-version "${{ matrix.python_version }}"
 
       - run: poetry run pytest
+
+      - run: poetry build
+        if: "${{ matrix.python_version == '3.12' }}"
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-directory
+          path: dist
+          retention-days: 1
+          compression-level: 0
