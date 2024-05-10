@@ -18,14 +18,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install poetry
-        run: pipx install poetry==1.6.1
+        run: pipx install poetry==1.8.2
 
       - uses: actions/setup-python@v5
         with:
           python-version: "${{ matrix.python_version }}"
           cache: "poetry"
 
-      - run: poetry install
+      - run: poetry install --sync
 
       - run: poetry run ruff check --output-format=github
         if: "${{ matrix.python_version == '3.12' }}"
