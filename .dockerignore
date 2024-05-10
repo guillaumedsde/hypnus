@@ -1,5 +1,5 @@
 *
-!morpheus/**/*.py
+!hypnus/**/*.py
 
 # NOTE: exclude pycache that are subdirectories of whitelisted directories above
 **/__pycache__/

@@ -1,8 +1,8 @@
 FROM gcr.io/distroless/python3-debian12:nonroot
 
-WORKDIR /morpheus
+WORKDIR /hypnus
 
-COPY --chown=nonroot:nonroot --chmod=755 morpheus .
+COPY --chown=nonroot:nonroot --chmod=755 hypnus .
 
 ENV PYTHONPATH="/"
-ENTRYPOINT [ "/morpheus/main.py" ]
+ENTRYPOINT [ "/hypnus/main.py" ]

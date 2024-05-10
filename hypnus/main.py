@@ -2,7 +2,7 @@
 import logging
 import sys
 
-from morpheus import power, tempo
+from hypnus import power, tempo
 
 _logger = logging.getLogger(__name__)
 

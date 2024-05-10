@@ -3,7 +3,7 @@ from unittest import mock
 
 import pytest
 
-from morpheus import tempo
+from hypnus import tempo
 
 
 @pytest.mark.parametrize(
@@ -11,7 +11,7 @@ from morpheus import tempo
     tempo.TempoDayColor,
     ids=tempo.TempoDayColor._member_names_,
 )
-@mock.patch("morpheus.tempo.urllib.request.urlopen", autospec=True)
+@mock.patch("hypnus.tempo.urllib.request.urlopen", autospec=True)
 def test_get_todays_tempo_color(
     mock_url_open: mock.MagicMock,
     expected_day_color: tempo.TempoDayColor,

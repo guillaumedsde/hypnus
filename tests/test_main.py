@@ -3,8 +3,8 @@ from unittest import mock
 
 import pytest
 
-from morpheus import main
-from morpheus.tempo import TempoDayColor
+from hypnus import main
+from hypnus.tempo import TempoDayColor
 
 
 @pytest.mark.parametrize(
@@ -12,8 +12,8 @@ from morpheus.tempo import TempoDayColor
     TempoDayColor,
     ids=TempoDayColor._member_names_,
 )
-@mock.patch("morpheus.main.power.shutdown", autospec=True)
-@mock.patch("morpheus.main.tempo.get_todays_tempo_color", autospec=True)
+@mock.patch("hypnus.main.power.shutdown", autospec=True)
+@mock.patch("hypnus.main.tempo.get_todays_tempo_color", autospec=True)
 def test_main_shutdown_on_day_color(
     mock_get_todays_tempo_color: mock.MagicMock,
     mock_shutdown: mock.MagicMock,

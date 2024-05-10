@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "morpheus"
+name = "hypnus"
 version = "0.1.0"
 description = "Power off computer on EDF Tempo red days."
 authors = ["guillaumedsde <30023543+guillaumedsde@users.noreply.github.com>"]
@@ -23,13 +23,13 @@ build-backend = "poetry.core.masonry.api"
 python_version = "3.11"
 strict = true
 files = [
-    "morpheus/**/*.py",
+    "hypnus/**/*.py",
     "tests/**/*.py"
 ]
 
 [tool.ruff]
 include = [
-    "morpheus/**/*.py",
+    "hypnus/**/*.py",
     "tests/**/*.py"
 ]
 exclude = ["__pycache__"]
