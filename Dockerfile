@@ -1,8 +1,8 @@
-FROM gcr.io/distroless/python3-debian12:nonroot
+FROM docker.io/python:3.12-slim-bookworm
 
 WORKDIR /hypnus
 
-COPY --chown=nonroot:nonroot --chmod=755 hypnus .
+COPY --chmod=755 hypnus .
 
 ENV PYTHONPATH="/"
 ENTRYPOINT [ "/hypnus/main.py" ]
