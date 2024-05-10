@@ -6,7 +6,7 @@ authors = ["guillaumedsde <30023543+guillaumedsde@users.noreply.github.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">= 3.8, < 3.12"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "0.4.3"
