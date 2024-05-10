@@ -19,19 +19,30 @@ Hypnus is implemented using the python standard library exclusively (it does not
 
 Hypnus is a small utility that executes once, it purposefully does not implement any scheduling.
 
-You can install and run it like so:
+You can schedule the hypnus command to run every day at 6:00 AM (time at which the Tempo color changes).
+
+You can install and run it multiple ways:
+
+
+### 🐍 With `pip install`
 
 ```bash
-pip install hypnus
+pip install "hypnus==1.0.0"
 hypnus
 ```
 
-You can schedule the `hypnus` command to run every day at 6:00 AM (time at which the Tempo color changes).
+### 🐋 With `docker run`
+
+*⚠️ Warning: running docker images with the `--privileged` flag is a security risk, I am currently exploring alternatives.*
+
+```bash
+docker run --rm --privileged ghcr.io/guillaumedsde/hypnus:1.0.0
+```
 
 ## 🔮 Roadmap
 
 - [x] Published Pypi package
-- [ ] Published multiarchitecture docker image
+- [x] Published multiarchitecture docker image
 - [ ] Published static binary
 
 ## ⚖️ License
