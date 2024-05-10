@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hypnus"
-version = "1.0.0a1"
+version = "1.0.0"
 description = "Power off computer on EDF Tempo red days."
 authors = ["guillaumedsde <30023543+guillaumedsde@users.noreply.github.com>"]
 license = "MIT"
