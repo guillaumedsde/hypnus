@@ -7,7 +7,8 @@ from hypnus import power, tempo
 _logger = logging.getLogger(__name__)
 
 
-def _main() -> None:
+def main() -> None:
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     day_color = tempo.get_todays_tempo_color()
 
     _logger.info("Today is a %s day", day_color.name)
@@ -18,5 +19,4 @@ def _main() -> None:
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    _main()
+    main()
