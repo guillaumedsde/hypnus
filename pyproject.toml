@@ -5,6 +5,7 @@ description = "Power off computer on EDF Tempo red days."
 authors = ["guillaumedsde <30023543+guillaumedsde@users.noreply.github.com>"]
 license = "MIT"
 repository = "https://github.com/guillaumedsde/hypnus"
+readme = "README.md"
 keywords = ["shutdown", "EDF", "tempo"]
 package-mode = true
 classifiers = [
