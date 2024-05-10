@@ -28,7 +28,6 @@ jobs:
       - run: poetry run ruff check --output-format=github
         if: "${{ matrix.python_version == '3.11' }}"
 
-      - run: poetry run mypy
-        if: "${{ matrix.python_version == '3.11' }}"
+      - run: poetry run mypy --python-version "${{ matrix.python_version }}"
 
       - run: poetry run pytest
