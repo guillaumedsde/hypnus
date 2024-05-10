@@ -4,6 +4,14 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python_version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
     steps:
       - uses: actions/checkout@v4
 
@@ -12,13 +20,15 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version-file: "pyproject.toml"
+          python-version: "${{ matrix.python_version }}"
           cache: "poetry"
 
       - run: poetry install
 
       - run: poetry run ruff check --output-format=github
+        if: "${{ matrix.python_version == '3.11' }}"
 
       - run: poetry run mypy
+        if: "${{ matrix.python_version == '3.11' }}"
 
       - run: poetry run pytest
